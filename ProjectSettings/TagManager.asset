@@ -6,6 +6,10 @@ TagManager:
   tags:
   - CameraMove
   - Object
+  - Desk
+  - Closet
+  - Door
+  - Lightswitch
   layers:
   - Default
   - TransparentFX

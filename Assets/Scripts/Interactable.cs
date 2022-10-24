@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class Interactable : MonoBehaviour
 {
-    bool objectCheck = false;
-    bool objectON = false;
+    public bool objectCheck = false;
+    public bool objectON = false;
     [SerializeField] Sprite onSprite, offSprite;
+
     public void Interact()
     {
         objectCheck = true;
