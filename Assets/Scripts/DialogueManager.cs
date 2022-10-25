@@ -7,6 +7,9 @@ public class DialogueManager : MonoBehaviour
 {
     [SerializeField] GameObject dialogueBox;
     [SerializeField] Text dialogueText;
+    [SerializeField] Canvas dialogueCanvas;
+
+    bool printing = false;
 
     private void Start()
     {
@@ -14,10 +17,15 @@ public class DialogueManager : MonoBehaviour
     }
     public void DialogueON(string text)
     {
-        dialogueText.text = "";
-        dialogueBox.SetActive(true);
-        dialogueText.gameObject.SetActive(true);
-        StartCoroutine(PrintDialogue(text));
+        dialogueCanvas.worldCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
+        if(printing == false)
+        {
+            printing = true;
+            dialogueText.text = "";
+            dialogueBox.SetActive(true);
+            dialogueText.gameObject.SetActive(true);
+            StartCoroutine(PrintDialogue(text));
+        }
     }
 
     IEnumerator PrintDialogue(string text)
@@ -35,6 +43,7 @@ public class DialogueManager : MonoBehaviour
         dialogueText.gameObject.SetActive(false);
         dialogueBox.SetActive(false);
         dialogueText.text = "";
+        printing = false;
        
     }
 }

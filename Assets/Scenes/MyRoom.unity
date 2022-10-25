@@ -1241,7 +1241,7 @@ GameObject:
   - component: {fileID: 1117981769}
   - component: {fileID: 1117981768}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: DialogueCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1377,6 +1377,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueBox: {fileID: 1564504192}
   dialogueText: {fileID: 966943979}
+  dialogueCanvas: {fileID: 1117981770}
 --- !u!1 &1141914979
 GameObject:
   m_ObjectHideFlags: 0

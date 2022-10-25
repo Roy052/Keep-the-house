@@ -5,14 +5,33 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public int time;
+    public int time = 0;
     [SerializeField] AudioSource audioSource;
     [SerializeField] AudioClip[] soundEffects;
+
+    //Unique GameManager
+    private static GameManager gameManagerInstance;
+
+    void Awake()
+    {
+        DontDestroyOnLoad(this);
+        if (gameManagerInstance == null)
+        {
+            gameManagerInstance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     public void HourLeft()
     {
         time++;
-        SceneManager.LoadScene(1);
+        if (time == 3)
+            SceneManager.LoadScene(1);
+        else
+            SceneManager.LoadScene(0);
     }
 
     public void SoundEffect(int closet_door_desk_light)

@@ -30,9 +30,6 @@ public class MainSM : MonoBehaviour
         lightswitch = GameObject.FindGameObjectWithTag("Lightswitch");
 
         StartCoroutine(SetUp());
-
-        if (time == 2) LightOFF();
-        else LightON();
     }
 
     private void Update()
@@ -48,8 +45,22 @@ public class MainSM : MonoBehaviour
     }
     IEnumerator SetUp()
     {
-        dialogueManager.DialogueON("Sweetie, Keep the house");
-        yield return new WaitForSeconds(2);
+        if(time == 0)
+        {
+            LightON();
+            dialogueManager.DialogueON("Sweetie, Keep the house");
+            yield return new WaitForSeconds(2);
+        }
+        else if(time == 1)
+        {
+            LightON();
+            door.GetComponent<Door>().DoorLock();
+        }
+        else
+        {
+            LightOFF();
+        }
+        
         player.GetComponent<Player>().moveStop = false;
     }
 

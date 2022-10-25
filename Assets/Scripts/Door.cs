@@ -36,4 +36,14 @@ public class Door : Interactable
         else
             dialogueManager.DialogueON("Door locked.");
     }
+
+    public void DoorLock()
+    {
+        locked = true;
+    }
+
+    public void DoorUnlock()
+    {
+        locked = false;
+    }
 }
