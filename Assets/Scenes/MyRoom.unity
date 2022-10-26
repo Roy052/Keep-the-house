@@ -2342,6 +2342,10 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 282123843631708130, guid: 107241d60fa4c8143a9fb1706d6f43a1, type: 3}
+      propertyPath: triggerPoint.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 282123843631708130, guid: 107241d60fa4c8143a9fb1706d6f43a1, type: 3}
       propertyPath: roomObjects.Array.data[0]
       value: 
       objectReference: {fileID: 372566573}
@@ -2361,6 +2365,22 @@ PrefabInstance:
       propertyPath: otherObjects.Array.data[3]
       value: 
       objectReference: {fileID: 68557499}
+    - target: {fileID: 282123843631708130, guid: 107241d60fa4c8143a9fb1706d6f43a1, type: 3}
+      propertyPath: triggerPoint.Array.data[0]
+      value: 
+      objectReference: {fileID: 1777666679}
+    - target: {fileID: 282123843631708130, guid: 107241d60fa4c8143a9fb1706d6f43a1, type: 3}
+      propertyPath: triggerPoint.Array.data[1]
+      value: 
+      objectReference: {fileID: 1188556555}
+    - target: {fileID: 282123843631708130, guid: 107241d60fa4c8143a9fb1706d6f43a1, type: 3}
+      propertyPath: triggerPoint.Array.data[2]
+      value: 
+      objectReference: {fileID: 626126118}
+    - target: {fileID: 282123843631708130, guid: 107241d60fa4c8143a9fb1706d6f43a1, type: 3}
+      propertyPath: triggerPoint.Array.data[3]
+      value: 
+      objectReference: {fileID: 1314993732}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 107241d60fa4c8143a9fb1706d6f43a1, type: 3}
 --- !u!1001 &672733811013630070
@@ -2384,7 +2404,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 672733810577522812, guid: 2dbdf3b3fc70c014a9cb4c9212188019, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.15
+      value: -4.66
       objectReference: {fileID: 0}
     - target: {fileID: 672733810577522812, guid: 2dbdf3b3fc70c014a9cb4c9212188019, type: 3}
       propertyPath: m_LocalPosition.y

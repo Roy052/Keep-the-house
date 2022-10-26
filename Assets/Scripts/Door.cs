@@ -19,8 +19,7 @@ public class Door : Interactable
         {
             gm.SoundEffect(2);
             Interact();
-        }
-            
+        } 
         else
             dialogueManager.DialogueON("Door locked.");
     }
@@ -32,7 +31,6 @@ public class Door : Interactable
             gm.SoundEffect(2);
             Interact();
         }
-
         else
             dialogueManager.DialogueON("Door locked.");
     }

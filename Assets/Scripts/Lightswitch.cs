@@ -17,6 +17,7 @@ public class Lightswitch : Interactable
         mainSM.LightON();
         gm.SoundEffect(4);
         Interact();
+        objectON = true;
     }
 
     public void LightOFF()
@@ -24,5 +25,7 @@ public class Lightswitch : Interactable
         mainSM.LightOFF();
         gm.SoundEffect(4);
         Interact();
+        objectON = false;
+        Debug.Log(objectON);
     }
 }

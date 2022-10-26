@@ -17,9 +17,13 @@ public class MainSM : MonoBehaviour
  
     bool cameraFollow = false;
     Vector3 tempPosition;
-    float[] timeAlphaChange = new float[3] { 0.25f, 0.3f, 0.35f };
+    float[] timeAlphaChange = new float[3] { 0.25f, 0.25f, 0.25f };
     int time = 0;
     GameManager gm;
+
+    //Event
+    int eventCount = 0;
+    [SerializeField] GameObject[] triggerPoint;
     private void Start()
     {
         gm = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -42,23 +46,28 @@ public class MainSM : MonoBehaviour
             tempPosition.z = -10;
             mainCamera.transform.position = tempPosition;
         }
+
+        EventOccur();
     }
     IEnumerator SetUp()
     {
         if(time == 0)
         {
             LightON();
+            lightswitch.GetComponent<Lightswitch>().objectON = true;
             dialogueManager.DialogueON("Sweetie, Keep the house");
             yield return new WaitForSeconds(2);
         }
         else if(time == 1)
         {
             LightON();
+            lightswitch.GetComponent<Lightswitch>().objectON = true;
             door.GetComponent<Door>().DoorLock();
         }
         else
         {
-            LightOFF();
+            Debug.Log(time);
+            lightswitch.GetComponent<Lightswitch>().LightOFF();
         }
         
         player.GetComponent<Player>().moveStop = false;
@@ -140,5 +149,55 @@ public class MainSM : MonoBehaviour
             return 4;
 
         return 0;
+    }
+
+    public void EventOccur()
+    {
+        if(time == 1)
+        {
+            if(eventCount == 0)
+            {
+                if (player.transform.position.x >= triggerPoint[3].transform.position.x)
+                    eventCount++;
+            }
+            else if(eventCount == 1)
+            {
+                if (player.transform.position.x <= triggerPoint[1].transform.position.x)
+                {
+                    door.GetComponent<Door>().DoorUnlock();
+                    door.GetComponent<Door>().DoorOpen();
+                    eventCount++;
+                }
+            }
+            else if(eventCount == 2)
+            {
+                if (player.transform.position.x <= triggerPoint[2].transform.position.x)
+                {
+                    //
+                    eventCount++;
+                }
+            }
+        }
+        else if(time == 2)
+        {
+            if(eventCount == 0)
+            {
+                if (player.transform.position.x <= triggerPoint[2].transform.position.x)
+                {
+                    //
+                    eventCount++;
+                }
+            }
+            else if(eventCount == 1)
+            {
+                if (player.transform.position.x <= triggerPoint[2].transform.position.x)
+                {
+                    //
+                    eventCount++;
+                }
+            }
+            
+            
+        }
     }
 }
