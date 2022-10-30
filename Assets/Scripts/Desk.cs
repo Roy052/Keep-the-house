@@ -35,6 +35,9 @@ public class Desk : Interactable
             case 4:
                 dialogueManager.DialogueON("There is an unclosed door.");
                 break;
+            case 5:
+                dialogueManager.DialogueON("The light is off.");
+                break;
         }
     }
 }

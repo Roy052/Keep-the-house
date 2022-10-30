@@ -17,17 +17,31 @@ public class Player : MonoBehaviour
     int objectType = -1; //0 : Closet, 1 : Desk, 2 : Door, 3 : Lightswitch
 
     public bool moveStop;
+
+    AudioSource audioSource;
+    bool isWalking = false;
     void Start()
     {
         rb = this.GetComponent<Rigidbody2D>();
         moveStop = true;
         animator = this.GetComponent<Animator>();
+        audioSource = this.GetComponent<AudioSource>();
     }
 
     void Update()
     {
         horizontal = Input.GetAxisRaw("Horizontal");
         animator.SetFloat("MoveSpeed", Mathf.Abs( horizontal));
+        if(isWalking == false && Mathf.Abs(horizontal) >= 0)
+        {
+            isWalking = true;
+            audioSource.Play();
+        }
+        else if(isWalking == true && Mathf.Abs(horizontal) == 0)
+        {
+            isWalking = false;
+            audioSource.Stop();
+        }
         if(objectTrigger && Input.GetKeyDown(KeyCode.E))
         {
             if(objectType == 0)
@@ -63,8 +77,10 @@ public class Player : MonoBehaviour
     {
         if(moveStop == false)
         {
+            
             rb.velocity = new Vector2(horizontal * speed, 0);
             Flip();
+            
         }    
     }
 

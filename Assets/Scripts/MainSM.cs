@@ -7,31 +7,34 @@ public class MainSM : MonoBehaviour
     [SerializeField] Camera mainCamera;
     [SerializeField] GameObject player;
     [SerializeField] GameObject dark;
-    [SerializeField] DialogueManager dialogueManager;
 
     //Objects
     [SerializeField] GameObject[] otherObjects;
-    GameObject[] roomObjects;
+    [SerializeField] GameObject[] roomObjects;
     GameObject door;
     GameObject lightswitch;
  
     bool cameraFollow = false;
     Vector3 tempPosition;
-    float[] timeAlphaChange = new float[3] { 0.25f, 0.25f, 0.25f };
+    float[] timeAlphaChange = new float[4] { 0.25f, 0.25f, 0.25f, 0.25f };
     int time = 0;
     GameManager gm;
+    DialogueManager dialogueManager;
 
     //Event
-    int eventCount = 0;
+    public int eventCount = 0;
     [SerializeField] GameObject[] triggerPoint;
+    [SerializeField] Sprite[] insideCloset;
+    [SerializeField] GameObject[] creatures;
+    [SerializeField] GameObject doorCreature;
     private void Start()
     {
         gm = GameObject.Find("GameManager").GetComponent<GameManager>();
         time = gm.time;
 
-        roomObjects = GameObject.FindGameObjectsWithTag("Closet");
         door = GameObject.FindGameObjectWithTag("Door");
         lightswitch = GameObject.FindGameObjectWithTag("Lightswitch");
+        dialogueManager = GameObject.Find("DialogueManager").GetComponent<DialogueManager>();
 
         StartCoroutine(SetUp());
     }
@@ -47,27 +50,49 @@ public class MainSM : MonoBehaviour
             mainCamera.transform.position = tempPosition;
         }
 
+        if (lightswitch.GetComponent<Lightswitch>().objectON == true)
+            foreach (GameObject creature in creatures)
+                creature.SetActive(false);
+
         EventOccur();
     }
     IEnumerator SetUp()
     {
-        if(time == 0)
+        doorCreature.SetActive(false);
+        yield return new WaitForSeconds(1);
+        if (time == 0)
         {
             LightON();
             lightswitch.GetComponent<Lightswitch>().objectON = true;
+            gm.SoundEffect(6);
+            yield return new WaitForSeconds(1);
             dialogueManager.DialogueON("Sweetie, Keep the house");
-            yield return new WaitForSeconds(2);
+            yield return new WaitForSeconds(2.5f);
         }
         else if(time == 1)
         {
             LightON();
             lightswitch.GetComponent<Lightswitch>().objectON = true;
+            gm.SoundEffect(7);
             door.GetComponent<Door>().DoorLock();
+            dialogueManager.DialogueON("I heard something.");
+            yield return new WaitForSeconds(2.5f);
         }
-        else
+        else if (time == 2)
+        {
+            LightON();
+            lightswitch.GetComponent<Lightswitch>().objectON = true;
+            gm.SoundEffect(6);
+            yield return new WaitForSeconds(1);
+            dialogueManager.DialogueON("Who's there?");
+            yield return new WaitForSeconds(2.5f);
+        }
+        else if(time == 3)
         {
             Debug.Log(time);
             lightswitch.GetComponent<Lightswitch>().LightOFF();
+            CreatureAppear(0);
+            CreatureAppear(2);
         }
         
         player.GetComponent<Player>().moveStop = false;
@@ -148,7 +173,16 @@ public class MainSM : MonoBehaviour
         if (temp1.objectON == true)
             return 4;
 
+        //Light
+        if (lightswitch.GetComponent<Lightswitch>().objectON == false)
+            return 5;
+
         return 0;
+    }
+
+    public void CreatureAppear(int num)
+    {
+        creatures[num].SetActive(true);
     }
 
     public void EventOccur()
@@ -171,9 +205,9 @@ public class MainSM : MonoBehaviour
             }
             else if(eventCount == 2)
             {
-                if (player.transform.position.x <= triggerPoint[2].transform.position.x)
+                if (door.GetComponent<Door>().objectON == false && player.transform.position.x <= triggerPoint[2].transform.position.x)
                 {
-                    //
+                    gm.SoundEffect(5);
                     eventCount++;
                 }
             }
@@ -182,22 +216,68 @@ public class MainSM : MonoBehaviour
         {
             if(eventCount == 0)
             {
-                if (player.transform.position.x <= triggerPoint[2].transform.position.x)
+                if (player.transform.position.x <= triggerPoint[2].transform.position.x && door.GetComponent<Door>().objectCheck == true)
                 {
-                    //
+                    otherObjects[4].GetComponent<SpriteRenderer>().sprite = insideCloset[1];
+                    roomObjects[0].GetComponent<Closet>().ClosetOpen();
                     eventCount++;
                 }
             }
             else if(eventCount == 1)
             {
-                if (player.transform.position.x <= triggerPoint[2].transform.position.x)
+                if (player.transform.position.x <= triggerPoint[1].transform.position.x)
                 {
-                    //
+                    lightswitch.GetComponent<Lightswitch>().LightOFF();
+                    CreatureAppear(2);
                     eventCount++;
                 }
             }
-            
-            
+            else if(eventCount == 2)
+            {
+                if(roomObjects[0].GetComponent<Closet>().objectON == false)
+                    otherObjects[4].GetComponent<SpriteRenderer>().sprite = insideCloset[0];
+                eventCount++;
+            }
+        }
+        else if (time == 3)
+        {
+            if (eventCount == 0)
+            {
+                if (lightswitch.GetComponent<Lightswitch>().objectON == true)
+                {
+                    eventCount++;
+                }
+            }
+            else if (eventCount == 1)
+            {
+                if (player.transform.position.x <= triggerPoint[1].transform.position.x)
+                {
+                    gm.SoundEffect(6);
+                    doorCreature.SetActive(true);
+                    door.GetComponent<Door>().objectCheck = false;
+                    eventCount++;
+                }
+            }
+            else if (eventCount == 2)
+            {
+                if (door.GetComponent<Door>().objectCheck == true && player.transform.position.x <= triggerPoint[3].transform.position.x)
+                {
+                    otherObjects[5].GetComponent<SpriteRenderer>().sprite = insideCloset[5];
+                    otherObjects[6].GetComponent<SpriteRenderer>().sprite = insideCloset[3];
+                    roomObjects[1].GetComponent<Closet>().ClosetOpen();
+                    roomObjects[2].GetComponent<Closet>().ClosetOpen();
+                    eventCount++;
+                }
+            }
+            else if (eventCount == 3)
+            {
+                if (door.GetComponent<Door>().objectCheck == true && player.transform.position.x <= triggerPoint[2].transform.position.x)
+                {
+                    otherObjects[4].GetComponent<SpriteRenderer>().sprite = insideCloset[8];
+                    roomObjects[0].GetComponent<Closet>().ClosetOpen();
+                    eventCount++;
+                }
+            }
         }
     }
 }

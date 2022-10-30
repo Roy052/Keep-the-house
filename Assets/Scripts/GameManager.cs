@@ -28,15 +28,20 @@ public class GameManager : MonoBehaviour
     public void HourLeft()
     {
         time++;
-        if (time == 3)
-            SceneManager.LoadScene(1);
+        if (time == 4)
+            SceneManager.LoadScene(2);
         else
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(1);
     }
 
-    public void SoundEffect(int closet_door_desk_light)
+    public void ToMyRoom()
     {
-        audioSource.clip = soundEffects[closet_door_desk_light];
+        SceneManager.LoadScene(0);
+    }
+
+    public void SoundEffect(int closetOpen_closetClose_door_desk_light_knockLeft_knockRight)
+    {
+        audioSource.clip = soundEffects[closetOpen_closetClose_door_desk_light_knockLeft_knockRight];
         audioSource.Play();
     }
 }
