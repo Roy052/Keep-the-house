@@ -22,14 +22,14 @@
   <div>
     <h2> 게임 스크린샷 </h2>
       <table>
-        <td><img src = "https://img.itch.zone/aW1hZ2UvMTQ4MTg0NS84ODQ0MzAzLnBuZw==/347x500/kOJfKI.png"></td>
-        <td><img src = "https://img.itch.zone/aW1hZ2UvMTQ4MTg0NS84ODQ0MzA1LnBuZw==/347x500/AVV0sq.png"></td>
-        <td><img src = "https://img.itch.zone/aW1hZ2UvMTQ4MTg0NS84ODQ0MzA0LnBuZw==/347x500/E2YKJS.png"></td>
+        <td><img src = "https://img.itch.zone/aW1hZ2UvMTc1ODkyMy8xMDQzNzM1Mi5wbmc=/347x500/5tJRBf.png"></td>
+        <td><img src = "https://img.itch.zone/aW1hZ2UvMTc1ODkyMy8xMDQzNzM1My5wbmc=/347x500/6%2B8kjO.png"></td>
+        <td><img src = "https://img.itch.zone/aW1hZ2UvMTc1ODkyMy8xMDQzNzM1MS5wbmc=/347x500/PJ3H9X.png"></td>
       </table>
   </div>
     <div>
     <h2> 게임 플레이 영상 </h2>
-    https://youtu.be/XSUDbSZ6rL4
+    https://youtu.be/VtFxvVEQJaQ
   </div>
   <div>
     <h2> 배운 점 </h2>
@@ -38,8 +38,8 @@
   </div>
   <div>
     <h2> 수정할 점 </h2>
-      <br><br>
-      <br><br>
+      부드러운 애니메이션, 다른 class들도 상속 적용하기<br><br>
+      추가적인 컨텐츠<br><br>
    <h2> Design Picture </h2>
    <table>
         <td><img src = "https://postfiles.pstatic.net/MjAyMjExMDJfMTYg/MDAxNjY3Mzk1ODYzMDQ2.7oWiwp3wYfsmV_05DE4pGZ6U9LXGqiivXSZOxNpuj30g.6ic2KYokY4wIv_TCayqR_sV6PVI5c_QOE0nUPqR9FjYg.JPEG.tdj04131/KakaoTalk_20221102_220253441.jpg?type=w773" height = 500></td>
